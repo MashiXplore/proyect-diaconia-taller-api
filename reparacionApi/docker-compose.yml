@@ -1,0 +1,17 @@
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb-taller
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123
+      MONGO_INITDB_DATABASE: DiaconiaTallerDB
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
